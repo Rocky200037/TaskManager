@@ -1,0 +1,37 @@
+@page
+@model TaskManager.Pages.TaskItems.IndexModel
+@{
+    ViewData["Title"] = "Task List";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="get">
+    <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Search tasks..." />
+    <button type="submit">Search</button>
+</form>
+
+<p><a asp-page="./Create">Create New Task</a></p>
+
+<table>
+    <thead>
+        <tr>
+            <th>Title</th><th>Due Date</th><th>Priority</th><th>Completed</th><th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+    @foreach (var item in Model.TaskItems)
+    {
+        <tr>
+            <td>@item.Title</td>
+            <td>@item.DueDate.ToShortDateString()</td>
+            <td>@item.Priority</td>
+            <td>@item.IsCompleted</td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>

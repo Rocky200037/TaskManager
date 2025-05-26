@@ -1,0 +1,36 @@
+@page "{id:int}"
+@model TaskManager.Pages.TaskItems.EditModel
+@{
+    ViewData["Title"] = "Edit Task";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form method="post">
+    <input type="hidden" asp-for="TaskItem.Id" />
+    <div>
+        <label>Title</label>
+        <input asp-for="TaskItem.Title" />
+    </div>
+    <div>
+        <label>Description</label>
+        <textarea asp-for="TaskItem.Description"></textarea>
+    </div>
+    <div>
+        <label>Due Date</label>
+        <input asp-for="TaskItem.DueDate" type="date" />
+    </div>
+    <div>
+        <label>Priority</label>
+        <select asp-for="TaskItem.Priority">
+            <option>Low</option>
+            <option>Medium</option>
+            <option>High</option>
+        </select>
+    </div>
+    <div>
+        <label>Completed</label>
+        <input asp-for="TaskItem.IsCompleted" type="checkbox" />
+    </div>
+    <button type="submit">Save</button>
+</form>
