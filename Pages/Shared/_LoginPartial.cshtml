@@ -3,25 +3,50 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
-<ul class="navbar-nav">
-@if (SignInManager.IsSignedIn(User))
-{
-    <li class="nav-item">
-        <a asp-area="Identity" asp-page="/Account/Manage/Index">Hello @User.Identity.Name!</a>
-    </li>
-    <li class="nav-item">
-        <form id="logoutForm" asp-area="Identity" asp-page="/Account/Logout" method="post">
-            <button type="submit" class="nav-link btn btn-link">Logout</button>
+@{
+    var currentPage = ViewContext.RouteData.Values["page"]?.ToString();
+}
+
+<div class="flex items-center gap-3">
+
+    @if (SignInManager.IsSignedIn(User))
+    {
+        <a asp-area="Identity"
+               asp-page="/Account/Manage/Index"
+               class="px-4 py-2 bg-slate-700 rounded-full text-white hover:bg-slate-600 transition shadow-md">
+            Hello @User.Identity.Name
+        </a>
+
+        <form asp-area="Identity"
+              asp-page="/Account/Logout"
+              method="post">
+
+            <button type="submit"
+                    class="px-4 py-2 bg-red-500 rounded-full text-white hover:bg-red-400 transition shadow-md">
+                Logout
+            </button>
+
         </form>
-    </li>
-}
-else
-{
-    <li class="nav-item">
-        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
-    </li>
-    <li class="nav-item">
-        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
-    </li>
-}
-</ul>
+    }
+    else
+    {
+        @if (currentPage != "/Account/Login")
+        {
+            <a asp-area="Identity"
+                   asp-page="/Account/Login"
+                   class="px-4 py-2 bg-blue-500 rounded-full text-black-50 hover:bg-blue-400 transition shadow-md">
+                Login
+            </a>
+        }
+
+        @if (currentPage != "/Account/Register")
+        {
+            <a asp-area="Identity"
+                   asp-page="/Account/Register"
+                   class="px-4 py-2 bg-amber-500 rounded-full text-black-50 hover:bg-amber-400 transition shadow-md">
+                Register
+            </a>
+        }
+    }
+
+</div>

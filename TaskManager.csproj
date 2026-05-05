@@ -11,13 +11,22 @@
 	  <None Remove="Areas\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Include="Areas\Identity\Data\TaskManagerContext.cs" />
+	  <Compile Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml.cs" />
+	  <Compile Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml.cs" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="Areas\Identity\Pages\Account\Manage\ExternalLogins.cshtml" />
+	  <None Include="Areas\Identity\Pages\Account\Manage\ResetAuthenticator.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
 		<!-- versions must align with net9.0 -->
-		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.0-preview.*" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="9.0.12" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0-preview.*" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0-preview.*" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0" />
-		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0-preview.*" PrivateAssets="all" />
-		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.0-preview.*" />
-		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.0" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.12" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.12" PrivateAssets="all" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.12" />
+		<PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
 	</ItemGroup>
 </Project>

@@ -6,6 +6,7 @@
 
 <h1>@ViewData["Title"]</h1>
 
+<!-- searching the database for a task title -->
 <form method="get">
     <input type="text" name="SearchTerm" value="@Model.SearchTerm" placeholder="Search tasks..." />
     <button type="submit">Search</button>
@@ -22,7 +23,7 @@
     <tbody>
 
     <!-- Displaying the details retrieved from the TaskItem class-->
-        <!-- object creation --> @foreach (var item in Model.TaskItems)
+    <!-- variable creation --> @foreach (var item in Model.TaskItems)
     {
         <tr>
             <td>@item.Title</td>
@@ -30,7 +31,7 @@
             <td>@item.Priority</td>
             <td>@item.IsCompleted</td>
             <td>
-                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a>
                 <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
             </td>
         </tr>
