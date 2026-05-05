@@ -20,7 +20,9 @@
         </tr>
     </thead>
     <tbody>
-    @foreach (var item in Model.TaskItems)
+
+    <!-- Displaying the details retrieved from the TaskItem class-->
+        <!-- object creation --> @foreach (var item in Model.TaskItems)
     {
         <tr>
             <td>@item.Title</td>
