@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +12,14 @@ namespace TaskManager.Pages.TaskItems;
 public class IndexModel : PageModel
 {
     private readonly ApplicationDbContext _context;
+    private readonly UserManager<IdentityUser> _userManager;
 
-    public IndexModel(ApplicationDbContext context)
+    public IndexModel(
+        ApplicationDbContext context,
+        UserManager<IdentityUser> userManager)
     {
         _context = context;
+        _userManager = userManager;
     }
 
     public IList<TaskItem> TaskItems { get; set; } = default!;
@@ -24,12 +29,21 @@ public class IndexModel : PageModel
 
     public async Task OnGetAsync()
     {
-        var query = _context.TaskItems.AsQueryable();
+        var user = await _userManager.GetUserAsync(User);
+
+        var query = _context.TaskItems
+            .Where(t => t.UserId == user!.Id);
+
         if (!string.IsNullOrWhiteSpace(SearchTerm))
         {
-            query = query.Where(t => t.Title.Contains(SearchTerm) ||
-                                     t.Description!.Contains(SearchTerm));
+            query = query.Where(t =>
+                t.Title.Contains(SearchTerm) ||
+                (t.Description != null &&
+                 t.Description.Contains(SearchTerm)));
         }
-        TaskItems = await query.OrderBy(t => t.DueDate).ToListAsync();
+
+        TaskItems = await query
+            .OrderBy(t => t.DueDate)
+            .ToListAsync();
     }
 }
